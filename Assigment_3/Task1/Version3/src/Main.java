@@ -24,7 +24,7 @@ class RandomNumberADO {
     // Access function to get the random seed
     public static int randomSeed() {
         Scanner reader = new Scanner(System.in);
-        System.out.println("Random seed the generator (y/n)? y");
+        System.out.print("Random seed the generator (y/n)? ");
         char s = reader.next().charAt(0);
         int local_actualrandom=0;
         if (s == 'y') {

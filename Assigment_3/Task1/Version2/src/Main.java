@@ -36,7 +36,7 @@ public class Main {
     public static int[] userSeed(int max){
         int[] response= new int[2];
         Scanner reader = new Scanner(System.in);
-        System.out.println("Random seed the generator (y/n)? y");
+        System.out.print("Random seed the generator (y/n)? ");
         char s = reader.next().charAt(0);
         if (s=='y') {
             response[0] = Math.abs((int)((int)(System.currentTimeMillis() / 10) % max));
@@ -50,7 +50,7 @@ public class Main {
         int response[]= new int[2];
         response[1]=0;
         Scanner reader = new Scanner(System.in);
-        System.out.println("Another random number (y/n)? y");
+        System.out.print("Another random number (y/n)? ");
         char s = reader.next().charAt(0);
         if (s=='y') {
             response[0] = Math.abs((int) (((factor * actualrandom) + increment) % max));
@@ -60,4 +60,3 @@ public class Main {
         return response;
     }
 }
-
