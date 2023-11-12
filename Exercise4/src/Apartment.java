@@ -2,27 +2,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Apartment {
-    private char userInput;
-    public int currentRoom;
-    Kitchen kitchen = new Kitchen("Kitchen", false, false);
-    Bathroom bathroom = new Bathroom("Bathroom", false, false);
-    ArrayList <Room> roomArrayList = new ArrayList<>();
-    Scanner input = new Scanner(System.in);
+    private char userInput; // Stores user input
+    public  int currentRoom; // Represents the current room index
+    Scanner input = new Scanner(System.in); // Scanner object for user input
 
-    public Apartment() {
+
+    ArrayList<Room> roomArrayList = new ArrayList<>(); // ArrayList to store rooms in the apartment
+    Kitchen kitchen   = new Kitchen ("Kitchen", false, false); // Instance of Kitchen
+    Bathroom bathroom = new Bathroom("Bathroom", false, false); // Instance of Bathroom
+
+
+    public Apartment() { // Constructor to initialize the apartment
         roomArrayList.add(kitchen);
         roomArrayList.add(bathroom);
     }
 
-    public Kitchen getKitchen() {
+    public Kitchen getKitchen() { // Getter methods for kitchen and bathroom instances
         return kitchen;
     }
-
     public Bathroom getBathroom() {
         return bathroom;
     }
 
-    public void enter(){
+    public void addNewRoom(Room room){ // Method to add a new room to the apartment
+        roomArrayList.add(room);
+    }
+
+    public void initialStatus(){ // Method to initiate the tour of the apartment
         userInput = ' ';
         System.out.println("Do you want a tour? y/n");
         userInput = input.next().charAt(0);
@@ -32,21 +38,23 @@ public class Apartment {
         }
     }
 
-    public void actionUser1(){
+    public void actionUser1(){ // Method to perform actions in the current room
         userInput = ' ';
         System.out.println("You are in the : "+roomArrayList.get(currentRoom).getName());
 
-        // Imprimir el esta de la habitacion´actual
-        if (roomArrayList.get(currentRoom).Light)
+        if (roomArrayList.get(currentRoom).Light) {
             System.out.println("The light here is on.");
+        }
         if (kitchen.Stove){
             System.out.println("The Stove is on.");
         }
         if (bathroom.Shower){
             System.out.println("The Shower is on.");
         }
+
         System.out.println("What do you want to do?");
         System.out.println(" 1) Light on/off. \n 2) Go to another Room. \n 3) Leave the actual Room.");
+
         if (roomArrayList.get(currentRoom).getClass() == Kitchen.class){
             System.out.println(" 4) Switch stove. ");
         }
@@ -88,7 +96,7 @@ public class Apartment {
                     }
                 }
                 if (currentRoom == 2){
-                        enter();
+                        initialStatus();
                     }
                 else{
                     currentRoom = 2;
@@ -98,35 +106,30 @@ public class Apartment {
             case '4':
                 System.out.println("This element has switched");
                 if (currentRoom == 0){
-                    kitchen.switchEtwas();
+                    kitchen.switchStove();
                 }
                 if (currentRoom == 1){
-                    bathroom.switchEtwas();
+                    bathroom.switchShower();
                 }
                 actionUser1();
                 break;
             default:
-                System.out.println("Falsch");
+                System.out.println("Incorrect character");
                 actionUser1();
         }
     }
-
-    public void addNewRoom(Room room){
-    roomArrayList.add(room);
-    }
-
-    public void actionUser2(){
+    public void actionUser2(){ // Method to perform actions related to choosing another room
         int userInt;
         System.out.println("Where do you want to go? ");
         roomArrayList.get(currentRoom).printNeighbours();
         userInt = input.nextInt();
-        currentRoom=vergleichung(roomArrayList.get(currentRoom).getVecinos().get(userInt));
+        currentRoom = comparison(roomArrayList.get(currentRoom).getNeighbor().get(userInt));
         actionUser1();
     }
 
-    public int vergleichung(Room room){
+    public int comparison(Room room){ // Method to compare and find the position of a room in the ArrayList
         int position = 0;
-        for (int i = 0; i<roomArrayList.size(); i++){
+        for (int i = 0; i < roomArrayList.size(); i++ ){
             if (roomArrayList.get(i).equals(room)){
             position = i;
             }

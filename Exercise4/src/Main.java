@@ -1,44 +1,38 @@
-import java.util.Scanner;
+/* Presented by:
+Jorge Elías Aponte Trejos - 108023117942
+Laura Valentina Moreno Castro - 108023117955
+Daniel Santiago Robayo Rico - 108023117968 */
 
 public class Main {
-
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Apartment apartment = new Apartment();
+        Apartment apartment = new Apartment(); // An instance of the class apartment is created.
 
-        // Se crean los objetos de la clase ROOM:
-
-        Room hallway = new Room("Hallway", false);
+        Room hallway = new Room("Hallway", false); // Three objects of the room class are created that correspond to the following rooms.
         Room bedroom = new Room("Bedroom", false);
-        Room sauna = new Room("Sauna", false);
+        Room sauna   = new Room("Sauna",   false);
 
-
-        // Se ordenan los elementos del apartamento en la lista:
-
-        apartment.addNewRoom(hallway);
+        apartment.addNewRoom(hallway);  // The three rooms are added to the list of the apartment.
         apartment.addNewRoom(bedroom);
         apartment.addNewRoom(sauna);
 
-        // Se agregar los vecinos de todas la habitaciones
-        hallway.addVecinos(sauna);
-        hallway.addVecinos(bedroom);
-        hallway.addVecinos(apartment.getBathroom());
-        hallway.addVecinos(apartment.getKitchen());
+        hallway.addNeighbor(sauna);      // The neighbors of all rooms are added to the list.
+        hallway.addNeighbor(bedroom);
+        hallway.addNeighbor(apartment.getBathroom());
+        hallway.addNeighbor(apartment.getKitchen());
 
-        apartment.getKitchen().addVecinos(sauna);
-        apartment.getKitchen().addVecinos(hallway);
+        apartment.getKitchen().addNeighbor(sauna);
+        apartment.getKitchen().addNeighbor(hallway);
 
-        apartment.getBathroom().addVecinos(bedroom);
-        apartment.getBathroom().addVecinos(hallway);
+        apartment.getBathroom().addNeighbor(bedroom);
+        apartment.getBathroom().addNeighbor(hallway);
 
-        sauna.addVecinos(hallway);
-        sauna.addVecinos(apartment.getKitchen());
+        sauna.addNeighbor(hallway);
+        sauna.addNeighbor(apartment.getKitchen());
 
-        bedroom.addVecinos(hallway);
-        bedroom.addVecinos(apartment.getBathroom());
+        bedroom.addNeighbor(hallway);
+        bedroom.addNeighbor(apartment.getBathroom());
 
-
-        apartment.enter();
+        apartment.initialStatus(); // Method of starting the tour of the apartment
         System.out.println("You leave the apartment.");
     }
 }
