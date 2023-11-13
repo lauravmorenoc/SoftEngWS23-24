@@ -8,12 +8,9 @@ public class Bathroom extends Room{
     public void switchShower(){ // Method that modifies the state of the shower
         Shower =!Shower;
     }
-    public boolean energyWarning() { //Method that sends a message to the user when boolean variables are in true state
+    public boolean energyWarning() { //Method that adds a message to the user when the shower is on
         boolean on = false;
-        if (Light){
-            System.out.println("The light in the " + Name + " is on.");
-            on = true;
-        }
+        super.energyWarning();
         if( Shower){
             System.out.println("The Shower is on");
         }

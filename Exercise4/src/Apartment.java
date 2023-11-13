@@ -83,10 +83,7 @@ public class Apartment {
                 }
                 bathroom.energyWarning();
                 kitchen.energyWarning();
-                if (kitchen.Stove){ // Check if the stove or shower are on
-                    aux2 = true;
-                }
-                if (bathroom.Shower){
+                if ((kitchen.Stove)||(bathroom.Shower)){ // Check if the stove or shower are on
                     aux2 = true;
                 }
                 if (aux2) { // Display warnings and prompt the user to stay or leave
@@ -125,7 +122,7 @@ public class Apartment {
         roomArrayList.get(currentRoom).printNeighbours();
         userInt = input.nextInt();
         currentRoom = comparison(roomArrayList.get(currentRoom).getNeighbor().get(userInt));  // Change the current room based on user selection
-        actionUser1(); // Continue actions in the new room
+        actionUser1(); // Continue actions from the beginning in the new room
     }
 
     public int comparison(Room room){ // Method to compare and find the position of a room in the ArrayList
