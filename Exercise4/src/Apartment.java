@@ -42,7 +42,7 @@ public class Apartment {
         userInput = ' ';
         System.out.println("You are in the : "+roomArrayList.get(currentRoom).getName());
 
-        if (roomArrayList.get(currentRoom).Light) {
+        if (roomArrayList.get(currentRoom).Light) { // Check and print the state of the light, stove, and shower
             System.out.println("The light here is on.");
         }
         if (kitchen.Stove){
@@ -52,10 +52,10 @@ public class Apartment {
             System.out.println("The Shower is on.");
         }
 
-        System.out.println("What do you want to do?");
+        System.out.println("What do you want to do?"); // Display user options
         System.out.println(" 1) Light on/off. \n 2) Go to another Room. \n 3) Leave the actual Room.");
 
-        if (roomArrayList.get(currentRoom).getClass() == Kitchen.class){
+        if (roomArrayList.get(currentRoom).getClass() == Kitchen.class){  // Options for Kitchen and Bathroom
             System.out.println(" 4) Switch stove. ");
         }
         if (roomArrayList.get(currentRoom).getClass() == Bathroom.class){
@@ -63,39 +63,40 @@ public class Apartment {
         }
         System.out.println("\n");
         userInput = input.next().charAt(0);
-        switch (userInput){
-            case '1':
+
+        switch (userInput){ // Process user input using a switch statement
+            case '1': // Toggle the light in the current room
                 System.out.println();
                 roomArrayList.get(currentRoom).switchLight();
                 System.out.println("The light is on: "+roomArrayList.get(currentRoom).Light+"\n");
-                actionUser1();
+                actionUser1();  // Recursive call to continue actions in the current room
                 break;
-            case '2':
+            case '2': // Go to another room
                 actionUser2();
                 break;
-            case '3':
+            case '3': // Leaving the room
                 boolean aux2 = false;
-                for (int i = 2; i<roomArrayList.size(); i++){
+                for (int i = 2; i<roomArrayList.size(); i++){ // Check energy warnings in other rooms
                     if (roomArrayList.get(i).energyWarning()){
                     aux2 = true;
                     }
                 }
                 bathroom.energyWarning();
                 kitchen.energyWarning();
-                if (kitchen.Stove){
+                if (kitchen.Stove){ // Check if the stove or shower are on
                     aux2 = true;
                 }
                 if (bathroom.Shower){
                     aux2 = true;
                 }
-                if (aux2) {
+                if (aux2) { // Display warnings and prompt the user to stay or leave
                     System.out.println("Do you want to stay in the room? y/n");
                     userInput = input.next().charAt(0);
                     if ('y' == userInput){
-                        actionUser1();
+                        actionUser1(); // Recursive call to continue actions in the current room
                     }
                 }
-                if (currentRoom == 2){
+                if (currentRoom == 2){ // Go back to the initial status if in the hallway, else go back to the hallway
                         initialStatus();
                     }
                 else{
@@ -103,7 +104,7 @@ public class Apartment {
                     actionUser1();
                 }
                 break;
-            case '4':
+            case '4': // Switch stove or shower in Kitchen or Bathroom
                 System.out.println("This element has switched");
                 if (currentRoom == 0){
                     kitchen.switchStove();
@@ -123,8 +124,8 @@ public class Apartment {
         System.out.println("Where do you want to go? ");
         roomArrayList.get(currentRoom).printNeighbours();
         userInt = input.nextInt();
-        currentRoom = comparison(roomArrayList.get(currentRoom).getNeighbor().get(userInt));
-        actionUser1();
+        currentRoom = comparison(roomArrayList.get(currentRoom).getNeighbor().get(userInt));  // Change the current room based on user selection
+        actionUser1(); // Continue actions in the new room
     }
 
     public int comparison(Room room){ // Method to compare and find the position of a room in the ArrayList
