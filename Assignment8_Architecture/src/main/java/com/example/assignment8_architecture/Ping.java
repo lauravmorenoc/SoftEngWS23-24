@@ -6,25 +6,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-
 import java.util.Random;
 
 public class Ping implements Plugin{
 
-    public String name;
-    public String button1_name;
-    public String input_message;
-    public String output_message;
+    private String name;
+    private String button1_name;
 
-    public Ping (String name, String button1_name, String input_message, String output_message) {
+    public Ping (String name, String button1_name) {
         this.name = name;
         this.button1_name = button1_name;
-        this.input_message = input_message;
-        this.output_message = output_message;
     }
 
     @Override
-    public BorderPane button1_action() {
+    public BorderPane action() {
         Random rand = new Random();
         TextField textF_ping = new TextField();
         Button button_ping = new Button(this.button1_name);
@@ -37,6 +32,7 @@ public class Ping implements Plugin{
         BorderPane pane2 = new BorderPane();
         pane2.setCenter(ping);
 
+        // The implementation of the ping in this case is done by means of a random number generator.
         button_ping.setOnAction(e -> {
             textF_ping.setText(rand.nextInt(500) + 1 + "ms");
         });

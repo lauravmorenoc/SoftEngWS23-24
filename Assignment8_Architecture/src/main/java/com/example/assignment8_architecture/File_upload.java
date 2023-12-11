@@ -9,23 +9,20 @@ import javafx.scene.layout.HBox;
 
 public class File_upload implements Plugin{
 
-    public String name;
-    public String button1_name;
-    public String button2_name;
-    public String input_message;
-    public String output_message;
+    private String name;
+    private String button1_name;
+    private String button2_name;
+    private String input_message;
+    private String output_message;
 
-    public File_upload(String name, String button1_name, String button2_name, String input_message, String output_message) {
+    public File_upload(String name, String button1_name, String button2_name) {
         this.name = name;
         this.button1_name = button1_name;
-        this.input_message = input_message;
-        this.output_message = output_message;
         this.button2_name=button2_name;
     }
 
-
     @Override
-    public BorderPane button1_action() {
+    public BorderPane action() {
         TextField textF_file = new TextField();
 
         Button button_file1 = new Button(this.button1_name);
@@ -46,10 +43,8 @@ public class File_upload implements Plugin{
         });
         return pane3;
     }
-
     @Override
     public String getName(){
         return this.name;
     }
-
 }
